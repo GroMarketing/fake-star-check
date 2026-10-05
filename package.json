@@ -1,7 +1,7 @@
 {
   "name": "fake-star-check",
-  "version": "0.1.0",
-  "description": "Look for signs of fake GitHub stars and show the evidence: new and empty stargazer accounts, accounts starring in lockstep, star bursts, stars that disappeared, forks per star vs similar repos. CLI, GitHub Action and MCP server. Read-only, heuristic.",
+  "version": "0.1.1",
+  "description": "Fake GitHub stars checker: look for signs of bought or inorganic stars in any repo using star history, stargazer accounts, lockstep starring and bursts, with the evidence shown. CLI, GitHub Action and MCP server. Read-only.",
   "type": "module",
   "bin": {
     "fake-star-check": "bin/fake-star-check.mjs"
@@ -37,7 +37,11 @@
     "mcp",
     "mcp-server",
     "claude-code",
-    "github-action"
+    "github-action",
+    "fake github stars",
+    "bought github stars",
+    "github star history",
+    "github stars checker"
   ],
   "license": "MIT",
   "author": "Ro Maldonado",

@@ -1,6 +1,6 @@
 # fake-star-check
 
-Look for signs of fake GitHub stars, and see the evidence behind each one.
+Look for signs of fake or bought GitHub stars, and see the evidence behind each one.
 Point it at a repo (or at your `package.json`) and it tells you who starred
 recently, whether those accounts move in lockstep, whether the stars arrived in
 a burst, how many stars later disappeared, and how the repo's forks compare

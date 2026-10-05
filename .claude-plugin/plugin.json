@@ -1,8 +1,16 @@
 {
   "name": "fake-star-check",
   "description": "Look for signs of fake GitHub stars and see the evidence behind each one: stargazer account age, lockstep starring, bursts, removed stars. Read-only heuristic, not proof.",
-  "version": "0.1.0",
-  "author": { "name": "Ro Maldonado" },
+  "version": "0.1.1",
+  "author": {
+    "name": "Ro Maldonado"
+  },
   "license": "MIT",
-  "keywords": ["github", "stars", "fake stars", "dependency vetting", "mcp"]
+  "keywords": [
+    "github",
+    "stars",
+    "fake stars",
+    "dependency vetting",
+    "mcp"
+  ]
 }
