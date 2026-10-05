@@ -1,0 +1,5 @@
+{
+  "name": "fake-star-check",
+  "owner": { "name": "Ro Maldonado" },
+  "plugins": [{ "name": "fake-star-check", "source": "./", "description": "Look for signs of fake GitHub stars and see the evidence behind each one: stargazer account age, lockstep starring, bursts, removed stars. Read-only heuristic, not proof." }]
+}

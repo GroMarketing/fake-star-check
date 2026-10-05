@@ -1,0 +1,74 @@
+name: fake-star-check
+description: Look for signs of fake GitHub stars on a list of repos (for example your dependencies) and write the evidence to the job summary. Read-only heuristic.
+author: Ro Maldonado
+branding:
+  icon: star
+  color: yellow
+inputs:
+  repos:
+    description: owner/repo names or GitHub URLs, separated by spaces, commas or new lines.
+    required: false
+    default: ''
+  repos-file:
+    description: Path to a file with one owner/repo per line (# comments allowed).
+    required: false
+    default: ''
+  package-json:
+    description: Path to a package.json; its dependencies are resolved to GitHub repos through the npm registry.
+    required: false
+    default: ''
+  include-dev:
+    description: With package-json, include devDependencies.
+    required: false
+    default: 'false'
+  sample:
+    description: Recent stargazers to profile per repo (10-100).
+    required: false
+    default: '60'
+  lockstep:
+    description: Read sampled stargazers' other stars (about 1 API request each).
+    required: false
+    default: 'true'
+  fail-on:
+    description: Fail the step if any repo's assessment is at least this level (weak, some, strong). Empty never fails on findings.
+    required: false
+    default: ''
+  token:
+    description: GitHub token used for read-only API calls. The default workflow token is enough for public repos.
+    required: false
+    default: ${{ github.token }}
+outputs:
+  report:
+    description: Path to the JSON report (an array, one entry per repo).
+    value: ${{ steps.run.outputs.report }}
+runs:
+  using: composite
+  steps:
+    - id: run
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        IN_REPOS: ${{ inputs.repos }}
+        IN_FILE: ${{ inputs.repos-file }}
+        IN_PACKAGE: ${{ inputs.package-json }}
+        IN_DEV: ${{ inputs.include-dev }}
+        IN_SAMPLE: ${{ inputs.sample }}
+        IN_LOCKSTEP: ${{ inputs.lockstep }}
+        IN_FAIL_ON: ${{ inputs.fail-on }}
+        XDG_CACHE_HOME: ${{ runner.temp }}/fake-star-check-cache
+      run: |
+        set -euo pipefail
+        args=()
+        repos=()
+        set -f
+        for r in $(printf '%s' "$IN_REPOS" | tr ',' ' '); do repos+=("$r"); done
+        [ -n "$IN_FILE" ] && args+=(--file "$IN_FILE")
+        [ -n "$IN_PACKAGE" ] && args+=(--package "$IN_PACKAGE")
+        [ "$IN_DEV" = "true" ] && args+=(--dev)
+        [ "$IN_LOCKSTEP" = "false" ] && args+=(--no-lockstep)
+        [ -n "$IN_FAIL_ON" ] && args+=(--fail-on "$IN_FAIL_ON")
+        report="$RUNNER_TEMP/fake-star-check.json"
+        echo "report=$report" >> "$GITHUB_OUTPUT"
+        # Repo names go after "--" so an input like "--file x" is a (bad) repo name, not an option.
+        node "$GITHUB_ACTION_PATH/bin/fake-star-check.mjs" ${args[@]+"${args[@]}"} --sample "$IN_SAMPLE" \
+          --json-out "$report" --markdown-out "$GITHUB_STEP_SUMMARY" -- ${repos[@]+"${repos[@]}"}

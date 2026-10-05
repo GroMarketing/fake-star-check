@@ -1,0 +1,56 @@
+{
+  "name": "fake-star-check",
+  "version": "0.1.0",
+  "description": "Look for signs of fake GitHub stars and show the evidence: new and empty stargazer accounts, accounts starring in lockstep, star bursts, stars that disappeared, forks per star vs similar repos. CLI, GitHub Action and MCP server. Read-only, heuristic.",
+  "type": "module",
+  "bin": {
+    "fake-star-check": "bin/fake-star-check.mjs"
+  },
+  "exports": {
+    ".": "./src/index.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "skills",
+    ".claude-plugin",
+    ".mcp.json",
+    "action.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs"
+  },
+  "keywords": [
+    "github",
+    "github stars",
+    "fake stars",
+    "stargazers",
+    "star history",
+    "supply chain",
+    "dependency vetting",
+    "open source",
+    "mcp",
+    "mcp-server",
+    "claude-code",
+    "github-action"
+  ],
+  "license": "MIT",
+  "author": "Ro Maldonado",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GroMarketing/fake-star-check.git"
+  },
+  "homepage": "https://github.com/GroMarketing/fake-star-check#readme",
+  "bugs": {
+    "url": "https://github.com/GroMarketing/fake-star-check/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.0",
+    "zod": "^4.6.5"
+  }
+}

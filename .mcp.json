@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "fake-star-check": {
+      "command": "npx",
+      "args": ["-y", "fake-star-check@latest", "mcp"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN:-}"
+      }
+    }
+  }
+}

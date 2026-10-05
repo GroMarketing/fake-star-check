@@ -1,0 +1,23 @@
+# Example: vet the GitHub repos behind your npm dependencies once a week and on demand.
+# Copy to .github/workflows/star-check.yml in your own repo.
+name: star-check
+on:
+  workflow_dispatch:
+    inputs:
+      repos:
+        description: Extra owner/repo names to check (space separated)
+        required: false
+  schedule:
+    - cron: '17 6 * * 1' # weekly; workflow_dispatch above lets you run it any time
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: GroMarketing/fake-star-check@v0
+        with:
+          package-json: package.json
+          repos: ${{ inputs.repos }}
+          # fail-on: strong
