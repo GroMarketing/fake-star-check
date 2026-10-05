@@ -1,5 +1,7 @@
 # fake-star-check
 
+<p align="center"><img src="https://raw.githubusercontent.com/GroMarketing/fake-star-check/main/.github/social-preview.png" alt="fake-star-check: Fake GitHub stars checker" width="100%"></p>
+
 Look for signs of fake or bought GitHub stars, and see the evidence behind each one.
 Point it at a repo (or at your `package.json`) and it tells you who starred
 recently, whether those accounts move in lockstep, whether the stars arrived in
